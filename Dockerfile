@@ -1,10 +1,7 @@
 # Use PyTorch base image
 FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-runtime
 
-# Install system dependencies
-# Install system dependencies (if needed).
-# Install system dependencies (if needed).
-# Install system dependencies (if needed).
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*

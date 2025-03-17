@@ -1,7 +1,6 @@
 # Use PyTorch base image
 FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-runtime
 
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
@@ -9,6 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Upgrade pip and install Python dependencies.
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Create the directory for model artifacts.
+RUN mkdir -p /opt/ml/model
+
+# Copy your local model weights into the model directory.
+COPY esm2_t12_35M_UR50D.pt /opt/ml/model/esm2_t12_35M_UR50D.pt
+COPY esm2_t12_35M_UR50D-contact-regression.pt /opt/ml/model/esm2_t12_35M_UR50D-contact-regression.pt
+
 
 # Set the working directory.
 WORKDIR /app
